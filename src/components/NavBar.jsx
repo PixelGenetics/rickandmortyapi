@@ -2,7 +2,7 @@
 const NavBar = () => {
     return(
         <>
-            <p>NavBar</p>
+            <p className="flex justify-center mt-5 mb-5">Rick and Morty API</p>
         </>
     )
 }
