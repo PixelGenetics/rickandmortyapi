@@ -26,10 +26,15 @@ const SearchBar = () => {
     }
 
     useEffect(() =>{
-    if (filtro !== 1) {
+        //3
+        //Si filtro es diferente a 1 y "keyWord == 0, entonces deberia de avanzar con la primer
+        //sentencia, de lo contrario, se hace lo habitual o traer la lista de todos los personajes ordenados por 
+        //orden alfabetico"
+        //Mover sentencia y axios a la funcion click
+    if (filtro !== 1 ) {
         console.log("Filtro: ",filtro)
         axios.get(`https://rickandmortyapi.com/api/character/?page=${filtro}&name=${keyWord}`).then(resp => {
-        //console.log("Dentro de click: ", resp.data)
+        console.log("Dentro de click: ", resp.data)
         setPasarInformacion(resp.data.results)
         })
     }else{
@@ -40,11 +45,15 @@ const SearchBar = () => {
         })
     }
 },[filtro])
-
-
+    
+    //2
+    //Cambiar logica de click, cuando el usuario clickee en 0, se retornara el endpoint by default, que es
+    //`https://rickandmortyapi.com/api/character/?page=${filtro} y se le agregara la funcion filtro  
+    //para que de igual forma pueda seguir aumentando y cambiando de paginas.
+    //Si el usuario ha rellanado el input, se retornara un axios con el filtro y keyWord para que se aumente
+    //y muestre el contenido ingresado en el input
     const click = () => {
-            
-            axios.get(`https://rickandmortyapi.com/api/character/?&name=${keyWord}`).then(resp => {
+                axios.get(`https://rickandmortyapi.com/api/character/?&name=${keyWord}`).then(resp => {
                 console.log("Dentro de click: ", resp.data.results)
                 setPasarInformacion(resp.data.results)
                 setLoading(false)
@@ -54,7 +63,7 @@ const SearchBar = () => {
 
     const mostrar = () => {
         return (pasarInformacion.map((personaje)=>(
-            <div className="bg-yellow-300 flex flex-col text-center m-10 rounded-md " key={personaje.id}>
+            <div className="bg-[#219ebc] flex flex-col text-center m-10 rounded-md " key={personaje.id}>
                 <img className="rounded-md" src={personaje.image} alt="" />
                 <p>Nombre: {personaje.name}</p>
                 <p>Gender: {personaje.gender}</p>
@@ -71,12 +80,16 @@ const SearchBar = () => {
             <div className="bg-[#219ebc] flex flex-col text-center m-10 rounded-md" key={objeto.id}>
                 <img className="rounded-md" src={objeto.image} alt="" />
                 <p>Name: {objeto.name}</p>
+                <p>Gender: {objeto.gender}</p>
             </div>
             )
         )
     }
-
-
+    //1
+    //console.log("PasarInformacion: ", pasarInformacion);
+    //Se podria poner una sentencia dentro del boton de buscar, pues cuando le clickeo al boton
+    //hace una busqueda aunque pasarInformacion.length sea 0, porque no hay nada que lo detenga
+    //Hacer sentencia para evitar que esto ocurra devolviendo un mensaje de error y 
     return(
     <>
         <div className="flex flex-col items-center w-full bg-[#023047]">
