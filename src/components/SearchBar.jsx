@@ -25,12 +25,12 @@ const SearchBar = () => {
         setFiltro(filtro+1)
     }
 
+
+    useEffect(() => {axios.get(`https://rickandmortyapi.com/api/character/?page=${filtro}`).then(resp => {
+        setInicio(resp.data.results)
+    })},[filtro])
+
     useEffect(() =>{
-        //3
-        //Si filtro es diferente a 1 y "keyWord == 0, entonces deberia de avanzar con la primer
-        //sentencia, de lo contrario, se hace lo habitual o traer la lista de todos los personajes ordenados por 
-        //orden alfabetico"
-        //Mover sentencia y axios a la funcion click
         if (keyWord.length == 0) {
             axios.get(`https://rickandmortyapi.com/api/character/?page=${filtro}`).then(resp => {
             console.log("primera sentencia: ",resp.data.results)
@@ -44,13 +44,7 @@ const SearchBar = () => {
         })
         }
 },[filtro])
-    
-    //2
-    //Cambiar logica de click, cuando el usuario clickee en 0, se retornara el endpoint by default, que es
-    //`https://rickandmortyapi.com/api/character/?page=${filtro} y se le agregara la funcion filtro  
-    //para que de igual forma pueda seguir aumentando y cambiando de paginas.
-    //Si el usuario ha rellanado el input, se retornara un axios con el filtro y keyWord para que se aumente
-    //y muestre el contenido ingresado en el input
+
     const click = () => {
                 axios.get(`https://rickandmortyapi.com/api/character/?&name=${keyWord}`).then(resp => {
                 console.log("Dentro de click: ", resp.data.results)
@@ -70,10 +64,6 @@ const SearchBar = () => {
         ))
         )
     }
-
-    useEffect(() => {axios.get(`https://rickandmortyapi.com/api/character/?page=${filtro}`).then(resp => {
-        setInicio(resp.data.results)
-    })},[filtro])
     
     const inicio_landpage = () =>{
         return inicio.map((objeto) => ( 
@@ -85,11 +75,7 @@ const SearchBar = () => {
             )
         )
     }
-    //1
-    //console.log("PasarInformacion: ", pasarInformacion);
-    //Se podria poner una sentencia dentro del boton de buscar, pues cuando le clickeo al boton
-    //hace una busqueda aunque pasarInformacion.length sea 0, porque no hay nada que lo detenga
-    //Hacer sentencia para evitar que esto ocurra devolviendo un mensaje de error y 
+
     return(
     <>
         <div className="flex flex-col items-center w-full bg-[#023047]">
