@@ -31,19 +31,18 @@ const SearchBar = () => {
         //sentencia, de lo contrario, se hace lo habitual o traer la lista de todos los personajes ordenados por 
         //orden alfabetico"
         //Mover sentencia y axios a la funcion click
-    if (filtro !== 1 ) {
-        console.log("Filtro: ",filtro)
+        if (keyWord.length == 0) {
+            axios.get(`https://rickandmortyapi.com/api/character/?page=${filtro}`).then(resp => {
+            console.log("primera sentencia: ",resp.data.results)
+            setPasarInformacion(resp.data.results)
+        })
+        }else if (filtro >= 1) {
+        console.log("Segunda Sentencia: ",filtro)
         axios.get(`https://rickandmortyapi.com/api/character/?page=${filtro}&name=${keyWord}`).then(resp => {
         console.log("Dentro de click: ", resp.data)
         setPasarInformacion(resp.data.results)
         })
-    }else{
-        console.log("Filtro: ",filtro)
-        axios.get(`https://rickandmortyapi.com/api/character/?page=${filtro}&name=${keyWord}`).then(resp => {
-            console.log("data: ", resp.data.results)
-        setPasarInformacion(resp.data.results)
-        })
-    }
+        }
 },[filtro])
     
     //2
@@ -71,9 +70,10 @@ const SearchBar = () => {
         ))
         )
     }
-    useEffect(() => {axios.get('https://rickandmortyapi.com/api/character').then(resp => {
+
+    useEffect(() => {axios.get(`https://rickandmortyapi.com/api/character/?page=${filtro}`).then(resp => {
         setInicio(resp.data.results)
-    })},[])
+    })},[filtro])
     
     const inicio_landpage = () =>{
         return inicio.map((objeto) => ( 
@@ -94,10 +94,10 @@ const SearchBar = () => {
     <>
         <div className="flex flex-col items-center w-full bg-[#023047]">
             <div className="flex justify-center gap-8 pt-12 pb-12">
-                <button disabled={filtro === 6} className={`${filtro == 0 ? 'bg-pink-400' : 'bg-[#8ecae6]'} w-10 h-10 rounded-md`} onClick={x => filtrarAtras(x)}><img src={atras} alt="" /></button>
+                <button disabled={filtro === 1} className={`${filtro == 0 ? 'bg-pink-400' : 'bg-[#8ecae6]'} w-10 h-10 rounded-md`} onClick={x => filtrarAtras(x)}><img src={atras} alt="" /></button>
                 <input type="text" className="border-2 border-[#219ebc] bg-[#219ebc] pr-20 pl-20 rounded-md text-center text-[#ffb703] placeholder:text-[#ffb703]" value={keyWord} onChange={x => {changes(x)}} placeholder="Type Something"/>
                 <button onClick={click} className="rounded-md bg-[#8ecae6] pr-20 pl-20">Buscar</button>
-                <button  disabled={filtro === 6} className={`${filtro == 6 ? 'bg-pink-400' : 'bg-[#8ecae6]'} w-10 h-10 rounded-md`} onClick={x =>filtrarAdelante(x)}><img src={adelante} alt="" /></button>
+                <button  disabled={filtro === pasarInformacion.length} className={`${filtro == 6 ? 'bg-pink-400' : 'bg-[#8ecae6]'} w-10 h-10 rounded-md`} onClick={x =>filtrarAdelante(x)}><img src={adelante} alt="" /></button>
             </div>
             <div className="grid grid-cols-4 ml-20 mr-20 bg-[#023047] w-full">
                 {
