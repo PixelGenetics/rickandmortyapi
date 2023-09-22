@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useState,useEffect } from "react"
-import LandingPage from "./LandingPage"
+import Menu from "../components/Menu"
 import atras from "../assets/3114883.png"
 import adelante from '../assets/arrow-forward_119427.png'
 
@@ -78,7 +78,7 @@ const SearchBar = () => {
 
     return(
     <>
-        <LandingPage />
+        <Menu />
         <div className="flex flex-col items-center w-full bg-[#023047]">
             <div className="flex justify-center gap-8 pt-12 pb-12">
                 <button disabled={filtro === 1} className={`${filtro == 0 ? 'bg-pink-400' : 'bg-[#8ecae6]'} w-10 h-10 rounded-md`} onClick={x => filtrarAtras(x)}><img src={atras} alt="" /></button>
