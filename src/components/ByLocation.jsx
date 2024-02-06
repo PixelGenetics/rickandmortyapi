@@ -63,21 +63,23 @@ const LocationComponent = () => {
                 {info.residents && <p>Population: {info.residents.length}</p>}
                 <p>Type: {info.type}</p>
             </div>
-            <div className='grid xl:grid-cols-4 sm:grid-cols-2 gap-8'>
-                {isLoading ? (
-                    <img src={img} alt="Loading" />
-                ) : (
-                    residents.map((resident) => (
-                        <div key={resident.id} className=' bg-[#22764f] border-2 rounded-xl text-center'>
-                            <img src={resident.image} alt='' className='mb-2 rounded-xl pb-5 w-full' />
-                            <p>{`Nombre: ${resident.name}`}</p>
-                            <p>{`Status: ${resident.status}`}</p>
-                            <p>{`Origen: ${resident.origin.name}`}</p>
-                            <p className='pb-5'>{`Episodios en los que aparece: ${resident.episode.length}`}</p>
-                        </div>
-                    ))
-                )}
-            </div>
+            <div className='grid xl:grid-cols-4 sm:grid-cols-2 gap-8 '>
+            {isLoading ? (
+                <img src={img} alt="Loading" />
+            ) : info.residents.length === 0 ? (
+                <h2 className='text-white mt-20 ml-[300px] text-center w-full h-full'>No characters known by the creators</h2>
+            ) : (
+                residents.map((resident) => (
+                    <div key={resident.id} className=' bg-[#22764f] border-2 rounded-xl text-center'>
+                        <img src={resident.image} alt='' className='mb-2 rounded-xl pb-5 w-full' />
+                        <p>{`Nombre: ${resident.name}`}</p>
+                        <p>{`Status: ${resident.status}`}</p>
+                        <p>{`Origen: ${resident.origin.name}`}</p>
+                        <p className='pb-5'>{`Episodios en los que aparece: ${resident.episode.length}`}</p>
+                    </div>
+                ))
+            )}
+        </div>
         </div>
     );
 };
