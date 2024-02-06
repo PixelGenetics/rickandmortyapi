@@ -55,6 +55,7 @@ const LocationComponent = () => {
                     type='number'
                     className='h-10 w-30 p-2 border-2 rounded-md mt-5'
                     onChange={(e) => handleChange(e)}
+                    min={1}
                 />
             </div>
             <div className='text-white md:mb-4 md:flex md:gap-10 md:border-2 md:h-10 md:w-[600px] md:justify-center md:items-center  md:bg-[#22764f] md:rounded-md xs:h-[100px] xs:w-[200px] xs:bg-[#22764f] xs:mb-4 xs:border-2 xs:rounded-md xs:gap-4 xs:items-center'>
