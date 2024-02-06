@@ -1,9 +1,9 @@
-
+import img from '../assets/cropped-2560-1440-1334906.jpeg'
 const NavBar = () => {
     return(
-        <>
-            <p className="flex justify-center mt-5 mb-5">Rick and Morty API</p>
-        </>
+        <div>
+            <img src={img} alt="" className='h-[300px] w-full'/>
+        </div>
     )
 }
 
