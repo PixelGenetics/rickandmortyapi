@@ -68,42 +68,43 @@ const LocationComponent = () => {
                     <p>Type: {info.type}</p>
                 </div>
             </div>
-            <div className='grid xl:grid-cols-4 sm:grid-cols-2 gap-8 '>
-                {isLoading ? (
-                    <img src={img} alt="Loading" />
-                ) : (
-                    info.residents?.length === 0 ? (
-                        <h2 className='text-white mt-20 text-center w-full h-full'>None</h2>
-                    ) : (
-                        visibleResidents.map((resident) => (
-                            <div key={resident.id} className=' bg-[#22764f] border-2 rounded-xl text-center relative'>
-                                <img src={resident.image} alt='' className='mb-2 rounded-xl pb-5 w-full' />
-                                <p>{`Nombre: ${resident.name}`}</p>
-                                <p>{`Origen: ${resident.origin.name}`}</p>
-                                <p className='pb-5'>{`Episodios en los que aparece: ${resident.episode.length}`}</p>
-                                {resident.status === 'Alive' && (
-                                    <div className='flex flex-row-reverse items-center justify-center gap-2 bg-black w-20 rounded-lg absolute top-5'>
-                                        <p className='text-white'>{`${resident.status}`}</p>
-                                        <div className='bg-green-300 w-3 h-3 rounded-2xl ' />
-                                    </div>
-                                )}
-                                {resident.status === 'Dead' && (
-                                    <div className='flex flex-row-reverse items-center justify-center gap-2 bg-black w-20 rounded-lg absolute top-5'>
-                                        <p className='text-white'>{`${resident.status}`}</p>
-                                        <div className='bg-red-700 w-3 h-3 rounded-2xl' />
-                                    </div>
-                                )}
-                                {resident.status !== 'Alive' && resident.status !== 'Dead' && (
-                                    <div className='flex flex-row-reverse items-center justify-center gap-2 bg-black w-32 rounded-lg absolute top-5'>
-                                        <p className='text-white'>{`${resident.status}`}</p>
-                                        <div className='bg-yellow-300 w-3 h-3 rounded-2xl' />
-                                    </div>
-                                )}
-                            </div>
-                        ))
-                    )
-                )}
-            </div>
+            <div className={`grid ${info.residents?.length < 4 ? 'justify-center' : 'xl:grid-cols-4 sm:grid-cols-2'} gap-8 border-2`}>
+    {isLoading ? (
+        <img src={img} alt="Loading" />
+    ) : (
+        info.residents?.length === 0 ? (
+            <h2 className='text-white mt-20 text-center w-full h-full'>None</h2>
+        ) : (
+            visibleResidents.map((resident) => (
+                <div key={resident.id} className=' bg-[#22764f] border-2 rounded-xl text-center relative'>
+                    <img src={resident.image} alt='' className='mb-2 rounded-xl pb-5 w-full' />
+                    <p>{`Nombre: ${resident.name}`}</p>
+                    <p>{`Origen: ${resident.origin.name}`}</p>
+                    <p className='pb-5'>{`Episodios en los que aparece: ${resident.episode.length}`}</p>
+                    {resident.status === 'Alive' && (
+                        <div className='flex flex-row-reverse items-center justify-center gap-2 bg-black w-20 rounded-lg absolute top-5'>
+                            <p className='text-white'>{`${resident.status}`}</p>
+                            <div className='bg-green-300 w-3 h-3 rounded-2xl ' />
+                        </div>
+                    )}
+                    {resident.status === 'Dead' && (
+                        <div className='flex flex-row-reverse items-center justify-center gap-2 bg-black w-20 rounded-lg absolute top-5'>
+                            <p className='text-white'>{`${resident.status}`}</p>
+                            <div className='bg-red-700 w-3 h-3 rounded-2xl' />
+                        </div>
+                    )}
+                    {resident.status !== 'Alive' && resident.status !== 'Dead' && (
+                        <div className='flex flex-row-reverse items-center justify-center gap-2 bg-black w-32 rounded-lg absolute top-5'>
+                            <p className='text-white'>{`${resident.status}`}</p>
+                            <div className='bg-yellow-300 w-3 h-3 rounded-2xl' />
+                        </div>
+                    )}
+                </div>
+            ))
+        )
+    )}
+</div>
+
             <div className='mt-6 mb-6'>
                 <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className='w-32 text-white cursor-pointer'>Previous</button>
                 <span className='text-green-700'>{`Page ${currentPage} of ${totalPages}`}</span>
