@@ -68,7 +68,7 @@ const LocationComponent = () => {
                     <p>Type: {info.type}</p>
                 </div>
             </div>
-            <div className={`grid ${info.residents?.length < 4 ? 'justify-center' : 'xl:grid-cols-4 sm:grid-cols-2'} gap-8 border-2`}>
+            <div className={`grid ${info.residents?.length < 4 ? 'justify-center' : 'xl:grid-cols-4 sm:grid-cols-2'} gap-8`}>
     {isLoading ? (
         <img src={img} alt="Loading" />
     ) : (
