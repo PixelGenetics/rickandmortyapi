@@ -62,7 +62,7 @@ const LocationComponent = () => {
                 <div className='mb-5 mt-2 flex justify-center'>
                     <h2 className='sm:text-3xl xs:text-lg font-bold text-green-300'>{info.dimension}</h2>
                 </div>
-                <div className='text-white sm:flex sm:gap-20 sm:mt-5 sm:mb-2 sm:border-none sm:flex-row xs:flex xs:flex-col xs:text-[12px] xs:border-2 xs:w-full xs:items-center'>
+                <div className='text-white sm:flex sm:gap-20 sm:mt-5 sm:mb-2 sm:border-none sm:flex-row xs:flex xs:flex-col xs:text-[12px] xs:w-full xs:items-center'>
                     <p>Dimension: {info.name}</p>
                     {info.residents && <p>Population: {info.residents.length}</p>}
                     <p>Type: {info.type}</p>
