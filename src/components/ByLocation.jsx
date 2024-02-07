@@ -52,29 +52,28 @@ const LocationComponent = () => {
 
     const totalPages = Math.ceil(residents.length / pageSize);
     const visibleResidents = residents.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-    
+
     return (
         <div className='flex flex-col items-center w-full bg-[#023047]'>
             <div className='mb-4'>
-                <input
-                    type='number'
-                    className='h-10 w-30 p-2 border-2 rounded-md mt-5'
-                    onChange={(e) => handleChange(e)}
-                    min={1}
-                />
+                <input type='number' className='h-10 w-30 p-2 border-2 rounded-md mt-5' onChange={(e) => handleChange(e)} min={1}/>
             </div>
-            <div className='text-white md:mb-4 md:flex md:gap-10 md:border-2 md:h-16 md:w-[600px] md:justify-center md:items-center  md:bg-[#22764f] md:rounded-md xs:h-[100px] xs:w-[250px] xs:bg-[#22764f] xs:mb-4 xs:border-2 xs:rounded-md xs:gap-4 xs:items-center'>
-                <h2>{info.dimension}</h2>
-                <p>Dimension: {info.name}</p>
-                {info.residents && <p>Population: {info.residents.length}</p>}
-                <p>Type: {info.type}</p>
+            <div className='sm:flex sm:flex-col sm:items-center sm:mb-10 sm:mt-10 sm:bg-[#22764f] sm:w-[500px] border-2 rounded-md xs:mb-8 xs:mt-8 xs:bg-red-400 xs:w-[300px]'>
+                <div className='mb-5 mt-2 flex justify-center'>
+                    <h2 className='sm:text-3xl xs:text-lg font-bold text-green-300'>{info.dimension}</h2>
+                </div>
+                <div className='text-white sm:flex sm:gap-20 sm:mt-5 sm:mb-2 sm:border-none sm:flex-row xs:flex xs:flex-col xs:text-[12px] xs:border-2 xs:w-full xs:items-center'>
+                    <p>Dimension: {info.name}</p>
+                    {info.residents && <p>Population: {info.residents.length}</p>}
+                    <p>Type: {info.type}</p>
+                </div>
             </div>
             <div className='grid xl:grid-cols-4 sm:grid-cols-2 gap-8 '>
                 {isLoading ? (
                     <img src={img} alt="Loading" />
                 ) : (
                     info.residents?.length === 0 ? (
-                        <h2 className='text-white mt-20 ml-[300px] text-center w-full h-full'>No characters known by the creators</h2>
+                        <h2 className='text-white mt-20 text-center w-full h-full'>None</h2>
                     ) : (
                         visibleResidents.map((resident) => (
                             <div key={resident.id} className=' bg-[#22764f] border-2 rounded-xl text-center relative'>
