@@ -58,7 +58,9 @@ const LocationComponent = () => {
                     min={1}
                 />
             </div>
-            <div className='text-white md:mb-4 md:flex md:gap-10 md:border-2 md:h-10 md:w-[600px] md:justify-center md:items-center  md:bg-[#22764f] md:rounded-md xs:h-[100px] xs:w-[200px] xs:bg-[#22764f] xs:mb-4 xs:border-2 xs:rounded-md xs:gap-4 xs:items-center'>
+            <div className='text-white md:mb-4 md:flex md:gap-10 md:border-2 md:h-16 md:w-[600px] md:justify-center md:items-center  md:bg-[#22764f] md:rounded-md xs:h-[100px] xs:w-[250px] xs:bg-[#22764f] xs:mb-4 xs:border-2 xs:rounded-md xs:gap-4 xs:items-center'>
+                {console.log(info)}
+                <h2>{info.dimension}</h2>
                 <p>Dimension: {info.name}</p>
                 {info.residents && <p>Population: {info.residents.length}</p>}
                 <p>Type: {info.type}</p>
@@ -71,12 +73,30 @@ const LocationComponent = () => {
         <h2 className='text-white mt-20 ml-[300px] text-center w-full h-full'>No characters known by the creators</h2>
     ) : (
         residents.map((resident) => (
-            <div key={resident.id} className=' bg-[#22764f] border-2 rounded-xl text-center'>
+            <div key={resident.id} className=' bg-[#22764f] border-2 rounded-xl text-center relative'>
                 <img src={resident.image} alt='' className='mb-2 rounded-xl pb-5 w-full' />
                 <p>{`Nombre: ${resident.name}`}</p>
-                <p>{`Status: ${resident.status}`}</p>
                 <p>{`Origen: ${resident.origin.name}`}</p>
                 <p className='pb-5'>{`Episodios en los que aparece: ${resident.episode.length}`}</p>
+                {resident.status === 'Alive' && (
+                    <div className='flex flex-row-reverse items-center justify-center gap-2 bg-black w-20 rounded-lg absolute top-5'>
+                        <p className='text-white'>{`${resident.status}`}</p>
+                        <div className='bg-green-300 w-3 h-3 rounded-2xl '/>
+                    </div>
+                )}
+                {resident.status === 'Dead' && (
+                    <div className='flex flex-row-reverse items-center justify-center gap-2 bg-black w-20 rounded-lg absolute top-5'> 
+                    <p className='text-white'>{`${resident.status}`}</p>
+                    <div className='bg-red-700 w-3 h-3 rounded-2xl'/>
+
+                    </div>
+                )}
+                {resident.status !== 'Alive' &&  resident.status !== 'Dead' &&(
+                    <div className='flex flex-row-reverse items-center justify-center gap-2 bg-black w-32 rounded-lg absolute top-5'>
+                        <p className='text-white'>{`${resident.status}`}</p>
+                        <div className='bg-yellow-300 w-3 h-3 rounded-2xl'/>
+                    </div>
+                )}
             </div>
         ))
     )
