@@ -58,7 +58,7 @@ const LocationComponent = () => {
             <div className='mb-4'>
                 <input type='number' className='h-10 w-30 p-2 border-2 rounded-md mt-5' onChange={(e) => handleChange(e)} min={1}/>
             </div>
-            <div className='sm:flex sm:flex-col sm:items-center sm:mb-10 sm:mt-10 sm:bg-[#22764f] sm:w-[500px] border-2 rounded-md xs:mb-8 xs:mt-8 xs:bg-red-400 xs:w-[300px]'>
+            <div className='sm:flex sm:flex-col sm:items-center sm:mb-10 sm:mt-10 sm:bg-[#22764f] sm:w-[500px] border-2 rounded-md xs:mb-8 xs:mt-8 xs:bg-[#22764f] xs:w-[300px]'>
                 <div className='mb-5 mt-2 flex justify-center'>
                     <h2 className='sm:text-3xl xs:text-lg font-bold text-green-300'>{info.dimension}</h2>
                 </div>
